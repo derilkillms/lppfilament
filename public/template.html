@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Politeknik LPP Yogyakarta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a5c2a',
+                        'primary-dark': '#0f3d1b',
+                        'primary-light': '#2d8a44',
+                        accent: '#f0a500',
+                        navy: '#1b2e5e',
+                        'navy-light': '#2a4080',
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scroll animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero overlay */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(15, 61, 27, 0.72) 0%, rgba(26, 92, 42, 0.55) 60%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        /* Nav hover underline */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f0a500;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Service card hover */
+        .service-card:hover .service-icon {
+            transform: scale(1.15);
+            background: #f0a500 !important;
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        /* Partner logo grayscale */
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* News card hover */
+        .news-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .news-card img {
+            transition: transform 0.4s ease;
+        }
+
+        /* Announcement card */
+        .ann-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .ann-card {
+            transition: all 0.3s ease;
+        }
+
+        /* Ticker */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-inner {
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-inner:hover {
+            animation-play-state: paused;
+        }
+
+        /* Pulse dot */
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .pulse-dot {
+            animation: pulse-dot 1.8s ease-in-out infinite;
+        }
+
+        /* Gallery hover */
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-800 antialiased">
+
+    <!-- TOP BAR -->
+    <div class="bg-primary-dark text-white text-xs py-1.5 px-4 flex items-center justify-between">
+        <div class="flex items-center gap-4 overflow-hidden">
+            <span class="text-accent font-semibold whitespace-nowrap flex items-center gap-1">
+                <span class="pulse-dot inline-block w-2 h-2 bg-accent rounded-full"></span>
+                BERITA TERBARU
+            </span>
+            <div class="overflow-hidden flex-1">
+                <div class="marquee-inner flex gap-12 whitespace-nowrap w-max">
+                    <span>Forum Komunikasi Karyawan &amp; Penyerahan SK Purna Tugas Wadir II Bidang Keuangan</span>
+                    <span>•</span>
+                    <span>Persiapan Dunia Kerja dan Etika Kerja</span>
+                    <span>•</span>
+                    <span>Selamat dan Sukses atas Kenaikan Jabatan Akademik</span>
+                    <span>•</span>
+                    <span>Pengumuman Yudisium — SK Yudisium 30 Januari 2026</span>
+                    <span>•</span>
+                    <span>Forum Komunikasi Karyawan &amp; Penyerahan SK Purna Tugas Wadir II Bidang Keuangan</span>
+                    <span>•</span>
+                    <span>Persiapan Dunia Kerja dan Etika Kerja</span>
+                    <span>•</span>
+                    <span>Selamat dan Sukses atas Kenaikan Jabatan Akademik</span>
+                    <span>•</span>
+                    <span>Pengumuman Yudisium — SK Yudisium 30 Januari 2026</span>
+                </div>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-3 ml-4 shrink-0">
+            <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                    <i class="fas fa-leaf text-white text-lg"></i>
+                </div>
+                <div class="leading-tight">
+                    <div class="text-xs text-gray-500 font-medium uppercase tracking-widest">Politeknik</div>
+                    <div class="text-primary font-bold text-base leading-none">LPP Yogyakarta</div>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-gray-700">
+                <a href="#" class="nav-link text-primary border-b-2 border-accent pb-0.5">Beranda</a>
+                <div class="relative group">
+                    <a href="#" class="nav-link flex items-center gap-1">Profil <i
+                            class="fas fa-chevron-down text-xs"></i></a>
+                    <div
+                        class="absolute top-full left-0 bg-white shadow-xl rounded-lg py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors">Sejarah</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors">Visi
+                            & Misi</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors">Struktur
+                            Organisasi</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="#" class="nav-link flex items-center gap-1">Unit / Bagian <i
+                            class="fas fa-chevron-down text-xs"></i></a>
+                    <div
+                        class="absolute top-full left-0 bg-white shadow-xl rounded-lg py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors">Akademik</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors">Kemahasiswaan</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <a href="#" class="nav-link flex items-center gap-1">Program Studi <i
+                            class="fas fa-chevron-down text-xs"></i></a>
+                    <div
+                        class="absolute top-full left-0 bg-white shadow-xl rounded-lg py-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors text-xs">Pengelolaan
+                            Hasil Perkebunan</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors text-xs">Akuntansi</a>
+                        <a href="#"
+                            class="block px-4 py-2 hover:bg-green-50 hover:text-primary transition-colors text-xs">Teknologi
+                            Rekayasa Mesin Industri</a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link">Download</a>
+                <a href="#" class="nav-link">PKKMB</a>
+                <a href="#" class="nav-link">Kontak</a>
+            </div>
+
+            <!-- Search -->
+            <div class="hidden md:flex items-center border border-gray-200 rounded-full overflow-hidden">
+                <input type="text" placeholder="Search..." class="px-3 py-1.5 text-sm outline-none w-36" />
+                <button
+                    class="bg-primary text-white px-4 py-1.5 text-sm font-semibold hover:bg-primary-light transition-colors">Search</button>
+            </div>
+
+            <!-- Hamburger -->
+            <button class="lg:hidden text-gray-700 text-xl"
+                onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pb-4">
+            <div class="flex flex-col gap-2 pt-2 text-sm font-medium">
+                <a href="#" class="py-2 text-primary border-b border-gray-100">Beranda</a>
+                <a href="#" class="py-2 border-b border-gray-100">Profil</a>
+                <a href="#" class="py-2 border-b border-gray-100">Unit / Bagian</a>
+                <a href="#" class="py-2 border-b border-gray-100">Program Studi</a>
+                <a href="#" class="py-2 border-b border-gray-100">Download</a>
+                <a href="#" class="py-2 border-b border-gray-100">PKKMB</a>
+                <a href="#" class="py-2">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="relative min-h-[520px] flex items-center justify-center overflow-hidden">
+        <!-- BG image placeholder (gradient as fallback) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dark via-primary to-primary-light"></div>
+        <!-- Decorative circles -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/3"></div>
+        <div class="absolute inset-0 hero-overlay"></div>
+
+        <div class="relative z-10 text-center text-white px-4 max-w-3xl mx-auto fade-in">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-4 drop-shadow-lg">
+                Politeknik LPP Yogyakarta
+            </h1>
+            <p class="text-white/85 text-base md:text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                Dikenal dengan keunggulan dalam pendidikan di bidang perkebunan, Politeknik LPP menjadi pilihan yang
+                tepat untuk meraih sukses di masa depan, melalui pendidikan vokasi yang menghasilkan lulusan kompeten
+                dan berkarakter.
+            </p>
+            <a href="#"
+                class="inline-flex items-center gap-2 bg-accent hover:bg-yellow-500 text-white font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <i class="fas fa-edit text-sm"></i>
+                Daftar Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10 fade-in">
+                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-serif">Keunggulan Politeknik
+                    LPP</h2>
+                <div class="w-16 h-1 bg-accent mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div
+                    class="bg-navy rounded-2xl p-6 text-white text-center hover:bg-navy-light hover:-translate-y-2 transition-all duration-300 shadow-lg fade-in">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-circle text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">>30% Lulusan Langsung Bekerja</h3>
+                    <p class="text-white/70 text-xs leading-relaxed">Lebih dari 30% lulusan Politeknik LPP mendapatkan
+                        pekerjaan sebelum wisuda</p>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="bg-navy rounded-2xl p-6 text-white text-center hover:bg-navy-light hover:-translate-y-2 transition-all duration-300 shadow-lg fade-in">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-handshake text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Mitra</h3>
+                    <p class="text-white/70 text-xs leading-relaxed">Memiliki kerjasama dengan Perusahaan Perkebunan
+                        baik BUMN dan Swasta, termasuk Beasiswa, Magang dan Magang Riset</p>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="bg-navy rounded-2xl p-6 text-white text-center hover:bg-navy-light hover:-translate-y-2 transition-all duration-300 shadow-lg fade-in">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-book-open text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Kurikulum</h3>
+                    <p class="text-white/70 text-xs leading-relaxed">Pendidikan Vokasi dimana kurikulum dan pembelajaran
+                        yang link and match dengan Industri</p>
+                </div>
+                <!-- Card 4 -->
+                <div
+                    class="bg-navy rounded-2xl p-6 text-white text-center hover:bg-navy-light hover:-translate-y-2 transition-all duration-300 shadow-lg fade-in">
+                    <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-certificate text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="font-bold text-base mb-2">Sertifikasi</h3>
+                    <p class="text-white/70 text-xs leading-relaxed">Lulusan mendapatkan Sertifikat Profesi oleh Badan
+                        Nasional Sertifikasi Profesi (BNSP)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYANAN TERPADU -->
+    <section class="py-16 bg-primary">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10 fade-in">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest font-serif">Layanan Terpadu</h2>
+                <div class="w-16 h-1 bg-accent mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 gap-6">
+                <!-- Services Row 1 -->
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center leading-tight">Penerimaan Mahasiswa
+                        Baru</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-building text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">PKL</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-id-card text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">Surad</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-book text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">Perpustakaan</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">SIM Ujian Perbaikan</span>
+                </div>
+                <!-- Services Row 2 -->
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-database text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">Repository</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-file-alt text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">SIM Legalisir</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">Tracer Study</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-laptop text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">E-Learning</span>
+                </div>
+                <div class="service-card flex flex-col items-center gap-2 cursor-pointer fade-in">
+                    <div class="service-icon w-16 h-16 bg-navy rounded-full flex items-center justify-center shadow-lg">
+                        <i class="fas fa-briefcase text-white text-xl"></i>
+                    </div>
+                    <span class="text-white text-xs font-semibold text-center">Career</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOKUMEN DIGITAL -->
+    <section class="py-10 bg-navy">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 fade-in">
+            <div>
+                <h3 class="text-white text-xl font-bold mb-2 font-serif">Dokumen Digital</h3>
+                <p class="text-white/70 text-sm leading-relaxed max-w-xl">
+                    Politeknik LPP memiliki berbagai dokumen digital yang dapat dimanfaatkan oleh mahasiswa, dosen,
+                    staf, maupun pihak lainnya. Oleh karena itu, Politeknik LPP Yogyakarta menyediakan tempat untuk
+                    mengakses tersebut.
+                </p>
+            </div>
+            <a href="#"
+                class="shrink-0 inline-flex items-center gap-2 border-2 border-accent text-accent hover:bg-accent hover:text-white font-bold px-6 py-2.5 rounded-full transition-all duration-300 text-sm">
+                <i class="fas fa-download text-sm"></i>
+                Unduh Dokumen
+            </a>
+        </div>
+    </section>
+
+    <!-- BERITA TERKINI -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-8 fade-in">
+                <div>
+                    <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-serif">Berita Terkini</h2>
+                    <div class="w-16 h-1 bg-accent mt-2 rounded-full"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- News Card 1 -->
+                <article
+                    class="news-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in">
+                    <div
+                        class="overflow-hidden h-48 bg-gradient-to-br from-primary/20 to-navy/20 flex items-center justify-center">
+                        <i class="fas fa-newspaper text-6xl text-primary/30"></i>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-white bg-accent font-semibold px-2 py-0.5 rounded-full">Berita
+                            Kampus</span>
+                        <h3
+                            class="font-bold text-sm mt-3 mb-2 leading-snug text-gray-800 hover:text-primary transition-colors cursor-pointer">
+                            Forum Komunikasi Karyawan & Penyerahan SK Purna Tugas Wadir II Bidang Keuangan</h3>
+                        <p class="text-xs text-gray-500 mb-3">Diterima Perwakilan • 4 Maret 2026</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+                <!-- News Card 2 -->
+                <article
+                    class="news-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in">
+                    <div
+                        class="overflow-hidden h-48 bg-gradient-to-br from-navy/20 to-primary/20 flex items-center justify-center">
+                        <i class="fas fa-users text-6xl text-navy/30"></i>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-white bg-primary font-semibold px-2 py-0.5 rounded-full">Berita
+                            Terkini</span>
+                        <h3
+                            class="font-bold text-sm mt-3 mb-2 leading-snug text-gray-800 hover:text-primary transition-colors cursor-pointer">
+                            Persiapan Dunia Kerja dan Etika Kerja</h3>
+                        <p class="text-xs text-gray-500 mb-3">Diterima Perwakilan • 22 Februari 2026</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+                <!-- News Card 3 -->
+                <article
+                    class="news-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 fade-in">
+                    <div
+                        class="overflow-hidden h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">
+                        <i class="fas fa-award text-6xl text-accent/50"></i>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs text-white bg-navy font-semibold px-2 py-0.5 rounded-full">Info</span>
+                        <h3
+                            class="font-bold text-sm mt-3 mb-2 leading-snug text-gray-800 hover:text-primary transition-colors cursor-pointer">
+                            Selamat dan Sukses atas Kenaikan Jabatan Akademik</h3>
+                        <p class="text-xs text-gray-500 mb-3">Diterima Perwakilan • 11 Februari 2026</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center mt-8 fade-in">
+                <a href="#"
+                    class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold px-8 py-2.5 rounded-full transition-all duration-300 text-sm">See
+                    More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PENGUMUMAN -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-8 fade-in">
+                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-serif">Pengumuman</h2>
+                <div class="w-16 h-1 bg-accent mt-2 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Ann 1 -->
+                <div class="ann-card border border-gray-100 rounded-2xl overflow-hidden shadow-sm fade-in">
+                    <div
+                        class="bg-gradient-to-br from-primary to-primary-dark h-40 flex items-center justify-center p-4">
+                        <div class="text-white text-center">
+                            <div
+                                class="text-xs font-bold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full mb-2">
+                                PENGUMUMAN YUDISIUM</div>
+                            <div class="font-serif font-bold text-base">POLITEKNIK LPP YOGYAKARTA</div>
+                            <div class="text-white/70 text-xs mt-1">Profesional & Berkarakter</div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-sm mb-2 leading-snug">SK Yudisium 30 Januari 2026</h4>
+                        <p class="text-xs text-gray-500 mb-3">Yang Punya Wali • 30 Januari 2026</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Ann 2 -->
+                <div class="ann-card border border-gray-100 rounded-2xl overflow-hidden shadow-sm fade-in">
+                    <div class="bg-gradient-to-br from-navy to-navy-light h-40 flex items-center justify-center p-4">
+                        <div class="text-white text-center">
+                            <div
+                                class="text-xs font-bold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full mb-2">
+                                SERTIFIKAT AKREDITASI</div>
+                            <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-award text-accent text-3xl"></i>
+                            </div>
+                            <div class="text-white/80 text-xs mt-2 font-bold">TERAKREDITASI</div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-sm mb-2 leading-snug">Prodi Sarjana Terapan Teknologi Rekayasa Mesin
+                            Industri Perkebunan Politeknik LPP Terakreditasi</h4>
+                        <p class="text-xs text-gray-500 mb-3">Politeknik LPP Yogyakarta • 10 November 2025</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Ann 3 -->
+                <div class="ann-card border border-gray-100 rounded-2xl overflow-hidden shadow-sm fade-in">
+                    <div class="bg-gradient-to-br from-accent to-yellow-600 h-40 flex items-center justify-center p-4">
+                        <div class="text-white text-center">
+                            <div
+                                class="text-xs font-bold uppercase tracking-widest bg-white/20 px-3 py-1 rounded-full mb-2">
+                                SERTIFIKAT AKREDITASI</div>
+                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-star text-white text-3xl"></i>
+                            </div>
+                            <div class="text-white text-xs mt-2 font-bold">TERAKREDITASI UNGGUL</div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-sm mb-2 leading-snug">Prodi Sarjana Terapan Teknologi Rekayasa Kimia
+                            Industri Politeknik LPP Raih Akreditasi Unggul</h4>
+                        <p class="text-xs text-gray-500 mb-3">Politeknik LPP Yogyakarta • 10 November 2025</p>
+                        <a href="#" class="text-primary text-xs font-bold hover:underline flex items-center gap-1">READ
+                            MORE <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8 fade-in">
+                <a href="#"
+                    class="inline-flex items-center gap-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold px-8 py-2.5 rounded-full transition-all duration-300 text-sm">See
+                    More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MITRA KERJASAMA -->
+    <section class="py-14 bg-gray-50 border-t border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10 fade-in">
+                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-serif">Mitra Kerjasama</h2>
+                <div class="w-16 h-1 bg-accent mx-auto mt-3 rounded-full"></div>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-8 fade-in">
+                <!-- Partner logos as styled placeholders -->
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">ISPO</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">Bakrie
+                        Swadikita Utama</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">BNSP</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">PKKMB
+                    </div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">Samora
+                        Group</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">ADB</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">Australia
+                        Awards</div>
+                </div>
+                <div class="partner-logo flex items-center justify-center h-12 w-28">
+                    <div class="bg-gray-200 rounded-lg px-4 py-2 text-gray-500 font-bold text-xs text-center">Mitra LPP
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERI -->
+    <section class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10 fade-in">
+                <h2 class="text-2xl font-bold text-primary uppercase tracking-widest font-serif">Galeri</h2>
+                <div class="w-16 h-1 bg-accent mx-auto mt-3 rounded-full"></div>
+                <p class="text-gray-500 text-sm mt-2">@politekniklpp</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 fade-in">
+                <div
+                    class="gallery-item relative overflow-hidden rounded-xl h-40 bg-gradient-to-br from-primary/30 to-navy/30 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-white/40"></i>
+                    </div>
+                    <div
+                        class="gallery-overlay absolute inset-0 bg-primary/70 opacity-0 flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div
+                    class="gallery-item relative overflow-hidden rounded-xl h-40 bg-gradient-to-br from-accent/30 to-primary/20 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-white/40"></i>
+                    </div>
+                    <div
+                        class="gallery-overlay absolute inset-0 bg-primary/70 opacity-0 flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div
+                    class="gallery-item relative overflow-hidden rounded-xl h-40 bg-gradient-to-br from-navy/30 to-primary/30 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-white/40"></i>
+                    </div>
+                    <div
+                        class="gallery-overlay absolute inset-0 bg-primary/70 opacity-0 flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div
+                    class="gallery-item relative overflow-hidden rounded-xl h-40 bg-gradient-to-br from-primary/20 to-accent/20 cursor-pointer">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-image text-4xl text-white/40"></i>
+                    </div>
+                    <div
+                        class="gallery-overlay absolute inset-0 bg-primary/70 opacity-0 flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 fade-in">
+                <a href="#"
+                    class="inline-flex items-center gap-2 border-2 border-gray-300 text-gray-600 hover:border-primary hover:text-primary font-semibold px-6 py-2.5 rounded-full transition-all duration-300 text-sm">Load
+                    More</a>
+                <a href="#"
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 text-sm hover:opacity-90">
+                    <i class="fab fa-instagram"></i> Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white pt-14 pb-6">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-leaf text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400 uppercase tracking-widest">Politeknik</div>
+                            <div class="font-bold text-white text-base">LPP Yogyakarta</div>
+                        </div>
+                    </div>
+                    <p class="text-accent font-semibold text-sm mb-4">Profesional Berkarakter</p>
+                    <div class="space-y-2 text-xs text-gray-400">
+                        <div class="flex items-start gap-2"><i class="fas fa-map-marker-alt mt-0.5 text-accent"></i> Jl.
+                            LPP No. 1A, Babarsari, Yogyakarta 55222</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-phone text-accent"></i> (0274) 1030779
+                        </div>
+                        <div class="flex items-center gap-2"><i class="fas fa-envelope text-accent"></i>
+                            mail@poltekniklpp.ac.id</div>
+                    </div>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <div>Today's visitors: 11</div>
+                        <div>Total visitors: 211,095</div>
+                    </div>
+                </div>
+
+                <!-- Menu -->
+                <div>
+                    <h4
+                        class="text-white font-bold mb-4 uppercase tracking-widest text-xs border-b border-gray-700 pb-2">
+                        Menu</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" class="hover:text-accent transition-colors">• Beranda</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Sejarah</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Visi Misi</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Download</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Kontak</a></li>
+                    </ul>
+                </div>
+
+                <!-- Layanan Terpadu -->
+                <div>
+                    <h4
+                        class="text-white font-bold mb-4 uppercase tracking-widest text-xs border-b border-gray-700 pb-2">
+                        Layanan Terpadu</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" class="hover:text-accent transition-colors">• PMB</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• PKL</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• SIAKAD/SIFILIS</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Tracer Study</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Perpustakaan</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• E-Learning</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Career</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• SIM Legalisir</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• LSP</a></li>
+                    </ul>
+                </div>
+
+                <!-- Program Studi -->
+                <div>
+                    <h4
+                        class="text-white font-bold mb-4 uppercase tracking-widest text-xs border-b border-gray-700 pb-2">
+                        Program Studi</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li><a href="#" class="hover:text-accent transition-colors">• Pengelolaan Hasil Perkebunan</a>
+                        </li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Akuntansi</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Budidaya Tanaman Perkebunan</a>
+                        </li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Pengolahan Perkebunan</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Teknologi Rekayasa Kimia Industri
+                                Perkebunan</a></li>
+                        <li><a href="#" class="hover:text-accent transition-colors">• Teknologi Rekayasa Mesin Industri
+                                Perkebunan</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Follow Us -->
+            <div class="text-center border-t border-gray-800 pt-6">
+                <p class="text-xs text-gray-500 mb-3">Follow Us</p>
+                <div class="flex items-center justify-center gap-4 mb-4">
+                    <a href="#"
+                        class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"><i
+                            class="fab fa-facebook-f text-white text-xs"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-500 transition-colors"><i
+                            class="fab fa-instagram text-white text-xs"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-500 transition-colors"><i
+                            class="fab fa-youtube text-white text-xs"></i></a>
+                </div>
+                <p class="text-xs text-gray-600">© 2025 Politeknik LPP Yogyakarta | All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll fade-in observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
