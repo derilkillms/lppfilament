@@ -24,6 +24,26 @@ class HomeController extends Controller
         return view('welcome', compact('news', 'tickerNews', 'announcements', 'partners', 'galleries', 'settings'));
     }
 
+    public function newsIndex(Request $request)
+    {
+        $settings = Setting::pluck('value', 'key')->toArray();
+        $tickerNews = News::where('is_published', true)->orderBy('created_at', 'desc')->take(5)->get();
+        
+        $query = News::where('is_published', true)->orderBy('created_at', 'desc');
+
+        if ($request->has('search') && $request->search != '') {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('content', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $news = $query->paginate(9)->withQueryString();
+
+        return view('news.index', compact('news', 'settings', 'tickerNews'));
+    }
+
     public function newsDetail(News $news)
     {
         $settings = Setting::pluck('value', 'key')->toArray();

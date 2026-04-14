@@ -13,7 +13,7 @@
     <div class="absolute inset-0 overflow-hidden pointer-events-none bg-black">
         <iframe 
             class="absolute top-1/2 left-1/2 w-[100vw] h-[100vw] md:h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            src="https://www.youtube.com/embed/KCeIhVXo5Xo?autoplay=1&mute=1&controls=0&loop=1&playlist=KCeIhVXo5Xo&rel=0&showinfo=0&iv_load_policy=3&disablekb=1" 
+            src="https://www.youtube.com/embed/aoJPuTDJd_E?autoplay=1&mute=1&controls=0&loop=1&playlist=aoJPuTDJd_E&rel=0&showinfo=0&iv_load_policy=3&disablekb=1" 
             frameborder="0" 
             allow="autoplay; encrypted-media" 
             allowfullscreen>
@@ -92,7 +92,7 @@
                     <span class="text-primary font-bold text-sm tracking-widest uppercase">Update Informasi</span>
                     <h2 class="text-navy font-black text-3xl md:text-4xl mt-2 font-serif">Berita Terkini</h2>
                 </div>
-                <a href="#" class="text-primary font-bold hover:text-primary-dark transition-colors flex items-center gap-2">
+                <a href="{{ route('news.index') }}" class="text-primary font-bold hover:text-primary-dark transition-colors flex items-center gap-2">
                     Lihat Semua Berita <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
