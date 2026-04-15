@@ -28,6 +28,9 @@ class NewsForm
                             ->required()
                             ->unique(ignoreRecord: true),
                         RichEditor::make('content')
+                         ->fileAttachmentsDisk('public')
+                    ->fileAttachmentsDirectory('news')
+                    ->fileAttachmentsVisibility('public')
                             ->columnSpanFull(),
                     ])->columns(2),
                 Section::make('Metadata')

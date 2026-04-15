@@ -42,6 +42,7 @@
 
                 <div class="mt-12 pt-8 border-t border-gray-100">
                     <h4 class="text-navy font-bold mb-4">Lampiran / Dokumen Terkait</h4>
+                    @if($announcement->attachment)
                     <div class="bg-gray-50 p-6 rounded-2xl flex items-center justify-between group border border-gray-100">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-primary text-xl shadow-sm border border-gray-100">
@@ -52,10 +53,14 @@
                                 <p class="text-xs text-gray-400">PDF • 1.2 MB</p>
                             </div>
                         </div>
-                        <a href="#" class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all">
+                        <a href="{{ Storage::url($announcement->attachment) }}" class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:bg-primary-dark transition-all">
                             Download
                         </a>
                     </div>
+                    @else
+                    <p class="text-gray-400 text-sm">Tidak ada lampiran</p>
+                    @endif
+
                 </div>
 
                 <!-- Back button -->
